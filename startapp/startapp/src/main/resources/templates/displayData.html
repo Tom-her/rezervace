@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data z CSV souboru</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2 class="my-4">Data z CSV souboru</h2>
+
+    <!-- Zobrazení zpráv -->
+    <div class="alert alert-info" th:if="${message}">
+        <p th:text="${message}"></p>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>ID Osoby</th>
+            <th>Prijmení</th>
+            <th>Jméno</th>
+            <th>Titul</th>
+            <th>Rodné číslo</th>
+            <th>Datum Od</th>
+            <th>Datum Do</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row : ${data}">
+            <td th:text="${row[0]}"></td>
+            <td th:text="${row[2]}"></td>
+            <td th:text="${row[1]}"></td>
+            <td th:text="${row[3]}"></td>
+            <td th:text="${row[4]}"></td>
+            <td th:text="${row[5]}"></td>
+            <td th:text="${row[6]}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/uploadForm" class="btn btn-primary">Nahrát další soubor</a>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

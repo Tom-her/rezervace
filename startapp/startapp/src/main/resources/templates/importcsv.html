@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nahrání CSV souboru</title>
+</head>
+<body>
+<h2>Nahrajte CSV soubor</h2>
+<form method="post" enctype="multipart/form-data" th:action="@{/upload}">
+    <input type="file" name="file" accept=".csv" />
+    <button type="submit">Nahrát</button>
+</form>
+</body>
+</html>

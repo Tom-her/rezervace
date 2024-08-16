@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Výsledky Grafu</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1 class="my-4">Výsledky Grafu</h1>
+
+    <!-- Plátno pro graf -->
+    <canvas id="myChart" width="400" height="200"></canvas>
+
+    <script>
+        // Získání hodnot z Thymeleafu a jejich vložení do pole
+        var prices = [
+            /* Thymeleaf nahradí tyto proměnné za hodnoty */
+            [[${price1}]],
+            [[${price2}]],
+            [[${price3}]]
+        ];
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line', // Typ grafu změněn na spojnicový
+            data: {
+                labels: ['Cena 1', 'Cena 2', 'Cena 3'],
+                datasets: [{
+                    label: 'Ceny',
+                    data: prices, // Použití pole s hodnotami
+                    fill: false, // Volitelně, pro odstranění výplně pod křivkou
+                    borderColor: 'rgba(75, 192, 192, 1)', // Barva čáry
+                    tension: 0.1 // Zajišťuje hladší křivku
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</div>
+</body>
+</html>

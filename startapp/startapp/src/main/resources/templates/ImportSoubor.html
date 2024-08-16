@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Import Souboru</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .btn-import {
+            background-color: #28a745; /* Zelená barva pozadí */
+            color: #FFFFFF; /* Bílá barva textu */
+        }
+        .btn-import:hover {
+            background-color: #218838; /* Tmavší zelená barva při najetí myší */
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .alert {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="my-4">Import Souboru</h1>
+
+    <!-- Zobrazení zprávy -->
+    <div th:if="${message}" class="alert alert-info">
+        <p th:text="${message}"></p>
+    </div>
+
+    <!-- Formulář pro import souboru -->
+    <form action="/import" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="file">Vyberte soubor k importu:</label>
+            <input type="file" id="file" name="file" class="form-control-file" required>
+        </div>
+        <button type="submit" class="btn btn-import">Import</button>
+    </form>
+
+    <!-- Zobrazení importovaných dat -->
+    <h2 class="my-4">Importovaná Data</h2>
+    <div>
+        <ul>
+            <li th:each="line : ${data}" th:text="${line}"></li>
+        </ul>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

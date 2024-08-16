@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Výsledky porovnání</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Výsledky porovnání</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Jméno</th>
+            <th>Příjmení</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row : ${result}">
+            <td th:text="${row[0]}"></td>
+            <td th:text="${row[1]}"></td>
+            <td th:text="${row[2]}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Import CSV</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Import CSV souboru</h1>
+
+    <!-- Formulář pro import plného CSV souboru -->
+    <h2>Import plného CSV souboru</h2>
+    <form th:action="@{/upload/full}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="fileFull">Vyberte CSV soubor s plnými daty</label>
+            <input type="file" id="fileFull" name="file" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Provést import</button>
+    </form>
+
+    <!-- Formulář pro import jednoduchého CSV souboru -->
+    <h2 class="mt-5">Import jednoduchého CSV souboru</h2>
+    <form th:action="@{/upload/simple}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="fileSimple">Vyberte CSV soubor s jménem a příjmením</label>
+            <input type="file" id="fileSimple" name="file" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Provést import</button>
+    </form>
+
+    <!-- Tabulka pro plná data -->
+    <div th:if="${data}">
+        <h2 class="mt-5">Data ze souboru s plnými daty</h2>
+        <table class="table table-striped mt-3">
+            <thead>
+            <tr>
+                <th>ID Osoby</th>
+                <th>Jméno</th>
+                <th>Příjmení</th>
+                <th>Titul</th>
+                <th>Rodné číslo</th>
+                <th>Datum Od</th>
+                <th>Datum Do</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="person : ${data}">
+                <td th:text="${person.idOsoby != null ? person.idOsoby : ''}">ID Osoby</td>
+                <td th:text="${person.jmeno != null ? person.jmeno : ''}">Jméno</td>
+                <td th:text="${person.prijmeni != null ? person.prijmeni : ''}">Příjmení</td>
+                <td th:text="${person.titul != null ? person.titul : ''}">Titul</td>
+                <td th:text="${person.rodneCislo != null ? person.rodneCislo : ''}">Rodné číslo</td>
+                <td th:text="${person.datumOd != null ? person.datumOd.format(T(java.time.format.DateTimeFormatter).ofPattern('dd.MM.yyyy')) : ''}">Datum Od</td>
+                <td th:text="${person.datumDo != null ? person.datumDo.format(T(java.time.format.DateTimeFormatter).ofPattern('dd.MM.yyyy')) : ''}">Datum Do</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Tabulka pro jednoduchá data -->
+    <div th:if="${matchingData}">
+        <h2 class="mt-5">Shodná data</h2>
+        <table class="table table-striped mt-3">
+            <thead>
+            <tr>
+                <th>Jméno</th>
+                <th>Příjmení</th>
+                <th>ID Osoby</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="person : ${matchingData}">
+                <td th:text="${person.jmeno != null ? person.jmeno : ''}">Jméno</td>
+                <td th:text="${person.prijmeni != null ? person.prijmeni : ''}">Příjmení</td>
+                <td th:text="${person.id != null ? person.id : ''}">ID Osoby</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

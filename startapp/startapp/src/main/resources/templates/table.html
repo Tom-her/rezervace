@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Table</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .error-message {
+            color: red;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f9f9f9; /* Bílá barva */
+        }
+        .table-striped tbody tr:nth-of-type(even) {
+            background-color: #ccffcc; /* Světlejší zelená barva */
+        }
+        /* Definování stylu pro logo */
+        .logo {
+            width: 250px; /* Změňte velikost podle potřeby */
+            height: auto;
+        }
+        /* Zarovnání textu na střed v záhlaví tabulky */
+        th {
+            text-align: center;
+        }
+        /* Styl pro tlačítko v pravém horním rohu */
+        .top-right-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .top-right-buttons .btn {
+            margin-left: 5px; /* Vzdálenost mezi tlačítky */
+        }
+        /* Styl pro červené tlačítko */
+        .btn-red {
+            background-color: #FF5733; /* Červená barva pozadí */
+            color: #FFFFFF; /* Bílá barva textu */
+        }
+        .btn-red:hover {
+            background-color: #C70039; /* Tmavší červená barva při najetí myší */
+        }
+        /* Styl pro odhlašovací tlačítko */
+        .btn-logout {
+            background-color: #dc3545; /* Červená barva pro odhlášení */
+            color: #FFFFFF; /* Bílá barva textu */
+        }
+        .btn-logout:hover {
+            background-color: #c82333; /* Tmavší červená barva při najetí myší */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Přidání loga -->
+    <img src="/images/logo.png" alt="Logo" class="logo">
+    <h1 class="my-4">Rezervace kurtů - Datum: <span th:text="${currentDate}"></span></h1>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Čas</th>
+            <th>Kurt 1</th>
+            <th>Kurt 2</th>
+            <th>Kurt 3</th>
+            <th>Kurt 4</th>
+            <th>Kurt 5</th>
+            <th>Kurt 6</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row : ${tableData}">
+            <td th:text="${row[0]}"></td>
+            <td th:text="${row[1]}"></td>
+            <td th:text="${row[2]}"></td>
+            <td th:text="${row[3]}"></td>
+            <td th:text="${row[4]}"></td>
+            <td th:text="${row[5]}"></td>
+            <td th:text="${row[6]}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2 class="my-4">Aktualizace tabulky</h2>
+    <form th:action="@{/update}" method="post" class="mb-4">
+        <div class="form-group">
+            <label for="time">Čas:</label>
+            <input type="text" id="time" name="time" class="form-control" placeholder="Např. 09:00-10:00">
+        </div>
+        <div class="form-group">
+            <label for="column">Kurt:</label>
+            <input type="text" id="column" name="column" class="form-control" placeholder="Např. kurt1">
+        </div>
+        <div class="form-group">
+            <label for="value">Hodnota:</label>
+            <input type="text" id="value" name="value" class="form-control" placeholder="Např. Rezervováno">
+        </div>
+        <button type="submit" class="btn btn-primary">Aktualizovat</button>
+    </form>
+
+    <div th:if="${error}">
+        <p class="error-message" th:text="${error}"></p>
+    </div>
+</div>
+
+<!-- Tlačítka pro přesměrování na stránku s grafem a Akcie -->
+<div class="top-right-buttons">
+    <a href="/kapitace" class="btn btn-secondary">Kapitace</a>
+    <a href="/upload" class="btn btn-red">CRP soubor</a>
+    <a href="/graf" class="btn btn-secondary">Přejít na graf</a>
+    <a href="http://www.akcie.cz" target="_blank" class="btn btn-info">Akcie</a>
+    <a href="https://xstation5.xtb.com/#/demo/loggedIn" target="_blank" class="btn btn-warning">Xstation</a>
+    <a href="/logout-success" class="btn btn-logout">Odhlásit</a> <!-- Tlačítko Odhlásit -->
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
